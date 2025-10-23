@@ -300,7 +300,7 @@ $(function() {
 		var th = $(this);
 		$.ajax({
 			type: "POST",
-			url: "mail.js", //Change
+			url: "mail.php", //Change
 			data: th.serialize()
 		}).done(function() {
       $('.contact').find('.form').addClass('is-hidden');
