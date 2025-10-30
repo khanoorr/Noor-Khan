@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Basic required fields (adjust as needed)
-$required = ['name', 'email', 'message'];
+$required = ['Name', 'Email', 'Phone', 'Message'];
 
 $data = [];
 foreach ($_POST as $k => $v) {
@@ -35,6 +35,12 @@ foreach ($_POST as $k => $v) {
     $value = is_array($v) ? $v : trim($v);
     if ($value === '' || $value === null) continue;
     $data[$key] = $value;
+}
+
+// Combine country_code and Phone
+if (isset($data['country_code']) && isset($data['Phone'])) {
+    $data['Phone'] = $data['country_code'] . ' ' . $data['Phone'];
+    unset($data['country_code']);
 }
 
 // Check required

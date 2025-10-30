@@ -18,7 +18,13 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
       // Optional: Scroll to success message
       document.querySelector(".form__reply").scrollIntoView({ behavior: 'smooth' });
     } else {
-      alert("Failed to send message. Please try again.");
+      response.json().then(data => {
+        if (data.errors) {
+          alert(data.errors.map(error => error.message).join(", "));
+        } else {
+          alert("Failed to send message. Please try again.");
+        }
+      })
     }
   })
   .catch(error => {
